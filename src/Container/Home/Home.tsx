@@ -70,7 +70,7 @@ export default function Home(props: any) {
 				{data &&
 					data.map((item: any, index: number) => {
 						return (
-							<Grid item xs={12} sm={6} md={3} lg={3} onClick={()=>navigation(`details/${123}`)}>
+							<Grid item xs={12} sm={6} md={3} lg={2} onClick={()=>navigation(`details/${item.id}`)}>
 								<Card
 									key={index}
 									name={item.original_title}
