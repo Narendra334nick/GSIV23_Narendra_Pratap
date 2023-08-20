@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMovieDetails } from "../../Redux/movieDetails";
 import { Box } from "@mui/material";
 import classes from "./Details.module.scss";
-import Grid from "@mui/material/Grid";
 
 export default function Details() {
 	const { id } = useParams();
@@ -19,14 +18,11 @@ export default function Details() {
 				method: "get",
 				url: `https://api.themoviedb.org/3/movie/${id}?api_key=${config.apiKey}`,
 			});
-			console.log("data by id", data);
 			dispatch(setMovieDetails(data.data));
 		} catch (error) {
 			console.log("error in getDataByMovieName", error);
 		}
 	};
-
-	console.log("data", data);
 
 	React.useEffect(() => {
 		if (id) {
