@@ -75,13 +75,14 @@ export default function Home(props: any) {
 				{data &&
 					data.map((item: any, index: number) => {
 						return (
-							<Grid item xs={12} sm={6} md={3} lg={2} onClick={()=>navigation(`details/${item.id}`)}>
+							<Grid item xs={12} sm={6} md={3} lg={2} onClick={()=>navigation(`details/${item.id}`)} key={index}>
 								<Card
 									key={index}
 									name={item.original_title}
 									poster={`${config.imageBaseUrl}${item.poster_path}`}
                   rating={item.vote_average}
                   description={item.overview}
+                  date={item?.release_date}
 								/>
 							</Grid>
 						);
