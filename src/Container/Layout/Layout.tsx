@@ -11,7 +11,7 @@ export default function Layout() {
 			<Box mt={10}>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/details" element={<Details />} />
+					<Route path="/details/:id" element={<Details />} />
 					{/* 👈 Renders at /#/app/ */}
 					{/* <Route path="/layout" element={<Layout />} /> */}
 					{/* 👈 Renders at /#/app/ */}

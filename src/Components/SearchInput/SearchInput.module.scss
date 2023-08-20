@@ -1,0 +1,25 @@
+.search{
+  border: none;
+  height: 100%;
+  width: 100%;
+  background: #bbbdc0;
+}
+
+.search:focus {
+  border-color: none;
+  border: none;
+}
+
+/* Override active styles */
+// .search.active-override:focus {
+//   border-color: initial; /* Reset border color */
+//   background-color: initial; /* Reset background color */
+// }
+
+.root{
+  border: 1px solid #bbbdc0;
+  border-radius: 5px;
+  padding: 4px;
+  width: 600px;
+  background: #bbbdc0;
+}
