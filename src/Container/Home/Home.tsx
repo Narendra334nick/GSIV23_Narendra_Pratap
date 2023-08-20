@@ -8,6 +8,7 @@ import SearchInput from "../../Components/SearchInput/SearchInput";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import { setLoader } from "../../Redux/loaderReducer";
 
 
 export default function Home(props: any) {
@@ -26,6 +27,7 @@ export default function Home(props: any) {
 	};
 
 	const getData = async () => {
+    dispatch(setLoader(true));
 		try {
 			const data = await axios({
 				method: "get",
@@ -37,7 +39,9 @@ export default function Home(props: any) {
       })
       d1.sort((a:any, b:any) => a.release_date - b.release_date)
 			dispatch(setData(d1));
+      dispatch(setLoader(false));
 		} catch (error) {
+      dispatch(setLoader(false));
 			console.log("error in getData", error);
 		}
 	};
@@ -47,13 +51,16 @@ export default function Home(props: any) {
 	}, []);
 
 	const getDataByMovieName = async (search: string) => {
+    dispatch(setLoader(true));
 		try {
 			const data = await axios({
 				method: "get",
 				url: `${config.urlMovieSearch}&query=${search}`,
 			});
 			dispatch(setData(data.data.results));
+      dispatch(setLoader(false));
 		} catch (error) {
+      dispatch(setLoader(false));
       console.log('error in getDataByMovieName',error);
     }
 	};

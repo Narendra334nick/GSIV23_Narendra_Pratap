@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMovieDetails } from "../../Redux/movieDetails";
 import { Box } from "@mui/material";
 import classes from "./Details.module.scss";
+import { setLoader } from "../../Redux/loaderReducer";
 
 export default function Details() {
 	const { id } = useParams();
@@ -13,13 +14,17 @@ export default function Details() {
 	const dispatch = useDispatch();
 
 	const getDataByMovieId = async (id: string | undefined) => {
+		dispatch(setLoader(true));
 		try {
 			const data = await axios({
 				method: "get",
 				url: `https://api.themoviedb.org/3/movie/${id}?api_key=${config.apiKey}`,
 			});
 			dispatch(setMovieDetails(data.data));
+			dispatch(setLoader(false));
 		} catch (error) {
+			dispatch(setLoader(false));
+
 			console.log("error in getDataByMovieName", error);
 		}
 	};
@@ -47,17 +52,20 @@ export default function Details() {
 					<Box fontSize={12}>{data?.tagline}</Box>
 					<Box>
 						<pre>
-							{data?.vote_average} | {data?.release_date} | {data?.status} | {data?.runtime} mins
+							{data?.vote_average} | {data?.release_date} | {data?.status} |{" "}
+							{data?.runtime} mins
 						</pre>
 					</Box>
 					<Box fontSize={14}>
-            Genere :  &nbsp;
-						{data?.genres?.map((item: any) => item.name)?.join(' | ')}
+						Genere : &nbsp;
+						{data?.genres?.map((item: any) => item.name)?.join(" | ")}
 					</Box>
 
-          <Box fontSize={14} mt={1}>
-            Language :  &nbsp;
-						{data?.spoken_languages?.map((item: any) => item.english_name)?.join(' | ')}
+					<Box fontSize={14} mt={1}>
+						Language : &nbsp;
+						{data?.spoken_languages
+							?.map((item: any) => item.english_name)
+							?.join(" | ")}
 					</Box>
 
 					<Box mt={1}>Overview &nbsp;: &nbsp;{data?.overview}</Box>
