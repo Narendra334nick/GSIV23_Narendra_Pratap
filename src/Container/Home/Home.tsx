@@ -31,7 +31,12 @@ export default function Home(props: any) {
 				method: "get",
 				url: config.url,
 			});
-			dispatch(setData(data.data.results));
+      const d1 = data.data.results;
+      d1.forEach((item:any)=>{
+        item.release_date = new Date(item.release_date);
+      })
+      d1.sort((a:any, b:any) => a.release_date - b.release_date)
+			dispatch(setData(d1));
 		} catch (error) {
 			console.log("error in getData", error);
 		}
