@@ -1,26 +1,22 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../../Redux/reducer';
+import Header from "../../Components/Header/Header";
+import Home from "../Home/Home";
+import { Box } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import Details from "../Details/Details";
 
 export default function Layout() {
-  const count = useSelector((state:any) => state.counter.value)
-  const dispatch = useDispatch();
-  return (
-    <div>
-      <div>
-        <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </button>
-      </div>
-    </div>
-  );
+	return (
+		<div>
+			<Header />
+			<Box mt={10}>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/details" element={<Details />} />
+					{/* 👈 Renders at /#/app/ */}
+					{/* <Route path="/layout" element={<Layout />} /> */}
+					{/* 👈 Renders at /#/app/ */}
+				</Routes>
+			</Box>
+		</div>
+	);
 }
